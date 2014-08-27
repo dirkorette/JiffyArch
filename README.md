@@ -277,7 +277,7 @@ Web-Konsole im Kundenmenü hervorragend!
 
 # Mitarbeit
 
-Bei Problemen etc. kann gerne ein GitHub Issue aufgemacht werden, bzw.
+Bei Problemen etc. kann gerne ein GitHub [Issue](https://github.com/stefan-it/JiffyArch/issues) aufgemacht werden, bzw.
 im Supportforum von domainFactory in [diesem](https://www.df.eu/forum/threads/74095-Arch-Linux-Installation) Thread
 geantwortet werden.
 
