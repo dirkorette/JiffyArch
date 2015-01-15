@@ -13,7 +13,7 @@ Im Kundenmenü wird das bestehende Partitionslayout wie folgt geändert:
 
 *   Die *Debian Wheezy* (7) 64-Bit Partition wird auf 5 GB verkleinert.
 *   *arch-boot* als ext4 mit 200MB wird neu angelegt.
-*   *arch-hd* als ext4 mit dem restlichen verfügbaren Speicherplatz 
+*   *arch-hd* als ext4 mit dem restlichen verfügbaren Speicherplatz
     wird neu angelegt.
 
 Dann werden die beiden neuen angelegten Festplatten dem Standardprofil
@@ -38,11 +38,11 @@ apt-get update && apt-get upgrade
 
 # *Arch Linux* Root-Image
 
-Zunächst wird das Root-Image von einem *Arch Linux* Spiegelserver 
+Zunächst wird das Root-Image von einem *Arch Linux* Spiegelserver
 heruntergeladen:
 
 ```bash
-curl -LO http://ftp.hosteurope.de/mirror/ftp.archlinux.org/iso/2014.08.01/arch/x86_64/airootfs.sfs
+curl -LO http://ftp.hosteurope.de/mirror/ftp.archlinux.org/iso/latest/arch/x86_64/airootfs.sfs
 ```
 
 Als nächstes müssen die ```squashfs-tools``` heruntergeladen werden, um
@@ -60,7 +60,7 @@ mkdir /arch
 mount -o loop /squashfs-root/airootfs.img /arch
 ```
 
-Bevor man in das eingebundene Root-Image "hineingeht", müssen zunächst 
+Bevor man in das eingebundene Root-Image "hineingeht", müssen zunächst
 weitere Sachen eingebunden werden:
 
 ```bash
@@ -92,7 +92,7 @@ mount -o bind /mnt.archboot/boot /mnt/boot
 mkdir /run/shm
 ```
 
-Nun werden Schlüssel importiert und geprüft für die Arch Linux 
+Nun werden Schlüssel importiert und geprüft für die Arch Linux
 Paketverwaltung:
 
 ```bash
@@ -124,15 +124,15 @@ dev /dev tmpfs rw 0 0
 EOF
 ```
 
-*Hinweis*: Später wird ein neues Profil für das Starten der JiffyBox 
-angelegt. Dort sind nur die Festplatten *arch-boot* und *arch-hd* 
-eingetragen. Deswegen lauten die Einträge in fstab dann auch 
+*Hinweis*: Später wird ein neues Profil für das Starten der JiffyBox
+angelegt. Dort sind nur die Festplatten *arch-boot* und *arch-hd*
+eingetragen. Deswegen lauten die Einträge in fstab dann auch
 ```/dev/xvda``` bzw. ```/dev/xvdb```.
 
 
 # arch-chroot
 
-Jetzt wird in die eigentliche *Arch Linux* Installation gewechselt. 
+Jetzt wird in die eigentliche *Arch Linux* Installation gewechselt.
 Dies geschieht mit dem Befehl:
 
 ```bash
@@ -163,7 +163,7 @@ locale-gen
 
 
 # Kernelerzeugung
-Die Arch Linux JiffyBox soll später einen eigenen Kernel verwenden. 
+Die Arch Linux JiffyBox soll später einen eigenen Kernel verwenden.
 Dazu müssen folgende Einstellung gemacht werden:
 
 ```bash
@@ -179,7 +179,7 @@ Die Erzeugung sollte erfolgreich abschließen mit *Image generation successful".
 
 # Grub
 
-Als Bootloader wird *Grub2* verwendet, der zunächst installiert werden 
+Als Bootloader wird *Grub2* verwendet, der zunächst installiert werden
 muss:
 
 ```bash
@@ -218,8 +218,8 @@ systemctl enable dhcpcd
 
 # SSH-Server
 
-Um später auf die *JiffyBox* zugreifen zu können, muss ein SSH-Server 
-installiert werden, der beim Hochfahren der *JiffBox* auch wieder 
+Um später auf die *JiffyBox* zugreifen zu können, muss ein SSH-Server
+installiert werden, der beim Hochfahren der *JiffBox* auch wieder
 automatisch gestartet wird:
 
 ```bash
@@ -230,7 +230,7 @@ systemctl enable sshd
 
 # Rootpasswort
 
-Zum Schluss sollte unbedingt ein Rootpasswort gesetzt werden - 
+Zum Schluss sollte unbedingt ein Rootpasswort gesetzt werden -
 **das auf keinen Fall vergessen**:
 
 ```bash
@@ -240,15 +240,15 @@ passwd
 
 # Herunterfahren
 
-Nun kann *arch-chroot* und *chroot* Umgebung wieder verlassen werden, 
-und das System heruntergefahren werden. 
+Nun kann *arch-chroot* und *chroot* Umgebung wieder verlassen werden,
+und das System heruntergefahren werden.
 
 Hinweis: ```unmount``` nicht vergessen!
 
 
 # Neues *JiffyBox*-Profil
-Jetzt muss ein neues *JiffyBox*-Profil angelegt werden. Als Name wählt 
-man beispielsweise *Jiffyarch* aus. Als Kernel muss unbedingt 
+Jetzt muss ein neues *JiffyBox*-Profil angelegt werden. Als Name wählt
+man beispielsweise *Jiffyarch* aus. Als Kernel muss unbedingt
 *Bootmanager 64bit (pvgrub64)* verwendet werden.
 
 Die Festplatten-Zuordnung sieht so aus:
@@ -256,22 +256,22 @@ Die Festplatten-Zuordnung sieht so aus:
 *   ```/dev/xvda``` -> *arch-boot* (0.20, ext4)
 *   ```/dev/svdb``` -> *arch-hd* (69.30, ext4)
 
-Als Root-Festplatte wird ```/dev/xvda``` ausgewählt. Dieses Profil 
-speichert man nun. Im Kundenmenü klickt man dann in der Status-Spalte 
-auf *Aktivieren*, sodass das neuangelegte Profil auch standardmässig 
+Als Root-Festplatte wird ```/dev/xvda``` ausgewählt. Dieses Profil
+speichert man nun. Im Kundenmenü klickt man dann in der Status-Spalte
+auf *Aktivieren*, sodass das neuangelegte Profil auch standardmässig
 verwendet wird.
 
 
 # Starten der *Arch Linux* *JiffyBox*
 
 Sofern das neue Profil angelegt wurde, kann die *JiffyBox* nun gestartet
-werden. Zur Sicherheit bzw. für etwaige Fehlermeldungen eignet sich die 
+werden. Zur Sicherheit bzw. für etwaige Fehlermeldungen eignet sich die
 Web-Konsole im Kundenmenü hervorragend!
 
 
 # Quellen
 
-*   [Arch Linux LiveCD Image](https://wiki.archlinux.org/index.php/Install_from_Existing_Linux#Method_2:_Using_the_LiveCD_Image) 
+*   [Arch Linux LiveCD Image](https://wiki.archlinux.org/index.php/Install_from_Existing_Linux#Method_2:_Using_the_LiveCD_Image)
 *   [Automatisierte Arch Installation (veraltet)](https://www.df.eu/forum/threads/70729-Automatisierte-Arch-Installation-%28Beta%29?highlight=arch)
 
 
@@ -285,7 +285,7 @@ geantwortet werden.
 
 ## Alternative Netzwerkkonfiguration
 
-Anstatt den ```dhcpcd``` Dämonen zu verwenden, kann man auch 
+Anstatt den ```dhcpcd``` Dämonen zu verwenden, kann man auch
 ```systemd-networkd``` benutzen.
 
 Zunächst wird dieser beim Starten deaktiviert:
@@ -294,7 +294,7 @@ Zunächst wird dieser beim Starten deaktiviert:
 systemctl disable dhcpcd
 ```
 
-Durch ```ip a``` bekommt u.a. den Namen der verwendeten Netzwerkkarte 
+Durch ```ip a``` bekommt u.a. den Namen der verwendeten Netzwerkkarte
 heraus - in diesem Beispiel gehen wir von ```eth0``` aus. Jetzt wird die
 Datei ```eth0.network``` in ```/etc/systemd/network``` angelegt, die die
 Netzwerkkonfiguration enthält:
@@ -312,20 +312,20 @@ Address=2a00:xxxx:3::cf/64
 Gateway=fe80::1
 ```
 
-Alle dafür benötigten Adressen befinden sich beim Punkt "Netzwerk" im 
+Alle dafür benötigten Adressen befinden sich beim Punkt "Netzwerk" im
 Kundenmenü. Um ```systemd-networkd``` bei jedem Start zu verwenden:
 
 ```bash
 systemctl enable systemd-networkd
 ```
 
-Die JiffyBox kann dann neugestartet werden. Mehr Informationen zur 
+Die JiffyBox kann dann neugestartet werden. Mehr Informationen zur
 ```systemd-networkd```-Syntax gibt es [hier](http://www.freedesktop.org/software/systemd/man/systemd.network.html).
 
 
 ## NTP - Zeitsynchronisierung
-In *systemd* (Ab Version 213) kann ein *timesync* Dämon verwendet werden 
-(in Kombination mit ```systemd-networkd```). Schritte zur Einrichtung 
+In *systemd* (Ab Version 213) kann ein *timesync* Dämon verwendet werden
+(in Kombination mit ```systemd-networkd```). Schritte zur Einrichtung
 sind folgende:
 
 ```bash
@@ -333,10 +333,10 @@ systemctl enable systemd-timesyncd.service
 sed -i 's/\(^ConditionVirtualization=\).*/\1xen/' /usr/lib/systemd/system/systemd-timesyncd.service
 ```
 
-Wichtig ist, dass ```ConditionVirtualization``` auf ```xen``` geändert 
+Wichtig ist, dass ```ConditionVirtualization``` auf ```xen``` geändert
 wird, sonst startet der Dienst nicht.
 
-Die eigentliche NTP Konfiguration kann dann in ```/etc/systemd/timesyncd.conf``` 
+Die eigentliche NTP Konfiguration kann dann in ```/etc/systemd/timesyncd.conf```
 vorgenommen werden - ich verwende als Beispiel folgenden Server:
 
 ```bash
