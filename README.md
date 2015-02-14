@@ -305,7 +305,7 @@ Name=eth0
 
 [Network]
 DNS=109.239.48.251
-Address=xx.xxx.xx.183/25
+Address=xx.xxx.xx.183/24
 Gateway=xx.xxx.xx.254
 
 Address=2a00:xxxx:3::cf/64
